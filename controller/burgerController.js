@@ -7,7 +7,7 @@ var burger = require("../models/burger.js");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-    res.render("main");
+    res.render("index");
 });
 
 // Export routes for server.js to use.
