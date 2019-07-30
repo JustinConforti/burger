@@ -3,9 +3,7 @@ module.exports = function(sequelize, DataTypes) {
         burger_name: {
             type: DataTypes.STRING,
             allowNull:false,
-            validate: {
-                len: [1,20]
-            }
+            len: [1,20]
         },
         devoured: {
             type: DataTypes.BOOLEAN,

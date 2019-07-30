@@ -1,38 +1,42 @@
-	<header>
-	<h1>Eat Da Burger!</h1>
-</header><!-- /header -->
+<h1>Eat Da Burger, Eat it Now!</h1>
+<br>
 
-<div class="wrapper">
-	<div id="create-burger">
-		<form action="/" method="POST">
-			<input id="burger-name" type="text" name="burger_name" placeholder="Create a burger">
-			<button id="submit-btn" type="submit">Manifest</button>
-		</form>
-	</div>
+<div id='avail'>
+    <h2>Burgers Available to Eat:</h2>
+    <ul>
+        {{#each burgers}} {{#unless this.devoured}}
+        <li>
+            {{this.id}}. {{this.burger_name}}
 
-	<section id="burgers-container">
-		<div id="burgers-available">
-			<h2>Burgers Available</h2>
-			{{#each burgers}}
-				{{#unless this.devoured}}
-				  <div class="burger">
-				    <form class="devour-burger-form" action="/{{id}}?_method=PUT" method="POST">
-				  		<button class="eat-btn">EAT</button>
-				    </form>
-						{{burger_name}} <span>#{{id}}</span>
-				  </div>
-				{{/unless}}
-			{{/each}}
-		</div>
-		<div id="burgers-devoured">
-			<h2>Burger Heaven</h2>
-			{{#each burgers}}
-				{{#if this.devoured}}
-				  <div class="burger">{{burger_name}} <span>#{{id}}</span></div>
-				{{/if}}
-			{{/each}}
-		</div>
-	</section>
+            <form action="/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="devoured" value="false">
+                <button class="btn btn-warning" type="submit">Eat Me!</button>
+            </form>
+
+        </li>
+        {{/unless}} {{/each}}
+    </ul>
 </div>
-  <script src="js/view.js" type="text/javascript"></script>
+<div id='devoured'>
+    <h2>Burgers That Have <br>Been Devoured: </h2>
 
+    <ul>
+        {{#each burgers}} {{#if this.devoured}}
+        <li>
+            {{this.id}}. {{this.burger_name}}
+        </li>
+        {{/if}} {{/each}}
+    </ul>
+</div>
+
+<div id='add'>
+    <h2>Add a Burger: </h2>
+
+    <form class="create-update-form" action="/" method="POST">
+        <div class="form-group">
+            <label for="dab">Burger Name:</label>
+            <input type="text" id="dab" name="burger_name">
+        </div>
+        <button class="btn btn-primary" type="submit">Add Burger</button>
+    </form>
+</div>
